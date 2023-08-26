@@ -6,7 +6,11 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'dark-purple': '#2a0645',
+      }
+    },
     fontFamily: {
       signature: ["Yeseva One"],
     },

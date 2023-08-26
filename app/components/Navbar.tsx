@@ -29,28 +29,45 @@ export default function Navbar() {
             link: '/contact',
         },
     ]
+
+    const socials = [
+        {
+            id: 'github',
+            icon: <FaGithub size={30} />,
+            link: 'https://github.com/mmajewsky133'
+        },
+        {
+            id: 'linkedin',
+            icon: <FaLinkedin size={30} />,
+            link: 'https://www.linkedin.com/in/martin-majewsky-z/'
+        },
+    ]
   
     return (
-        <div className="flex justify-between items-center w-full h-20 px-4 text-zinc-300 bg-black ">
+        <div className="flex justify-between items-center w-full h-20 px-4 text-zinc-300 bg-transparent fixed">
             <div>
-                <h1 className="text-4xl font-bold font-signature">MMZ</h1>
+                <h1 className="text-5xl font-bold font-signature">MMZ</h1>
             </div>
 
             <ul className="hidden md:flex">
                 {links.map(({id, title, link}) => (
-                    <li key={id} className='px-4 cursor-pointer capitalize font-medium text-zinc-300 hover:scale-105'>
-                        <Link href={link}>{title}</Link>
-                    </li>
+                    <>
+                        <li key={id} className='px-4 cursor-pointer capitalize font-medium text-zinc-300 '>
+                            <Link href={link}>{title}</Link>
+                        </li>
+                        <li className='px-4 font-medium text-zinc-300'> / </li>
+                    </>
                 ))}
             </ul>
 
             <ul className="hidden md:flex ">
-                <li className='cursor-pointer pr-4 z-10 text-gray-500'>
-                    <FaGithub size={30} />
-                </li>
-                <li className='cursor-pointer pr-4 z-10 text-gray-500'>
-                    <FaLinkedin size={30} />
-                </li>
+                {socials.map(({id, icon, link}) => (
+                    <li key={id} className='cursor-pointer pr-4 z-10 text-gray-500'>
+                        <a href={link}>
+                            {icon}
+                        </a>
+                    </li>
+                ))}
             </ul>
 
             <div onClick={() => setNav(!nav)} 
