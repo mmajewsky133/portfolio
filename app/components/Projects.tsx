@@ -13,18 +13,20 @@ const projectsData = [
     role: "Backend Architect & Developer",
     techStack: ["Java", "Spring Boot", "Angular", "Oracle PL/SQL"],
     softSkills: ["Leadership", "System Architecture", "Cross-team Collaboration"],
-    imageAlt: "SIVIPCAN Dashboard Preview",
-    pictures: ["/placeholder-project1-a.png", "/placeholder-project1-b.png"], // Swap with actual paths later
+    imageAlt: "SIVIPCAN v5",
+    img: "/sivipcan5.png",
+    pictures: ["/sivipcan5.png"],
   },
   {
     id: 2,
-    title: "Movicáncer Platform App",
+    title: "SAI-MCN",
     description: "Internal multiplatform application to automate event registrations and secure donations. Handled 2,500+ real-time registrations with strict adherence to PCI-DSS and GDPR.",
     role: "Full-Stack Engineer",
     techStack: ["Kotlin (KMP)", "Laravel", "MySQL"],
     softSkills: ["Agile Delivery", "Security Compliance", "Problem Solving"],
-    imageAlt: "Movicáncer App Interface",
-    pictures: ["/placeholder-project2-a.png", "/placeholder-project2-b.png"], // Swap with actual paths later
+    imageAlt: "SAI-MCN",
+    img: "/saimcn.png",
+    pictures: ["/saimcn.png"],
   },
   {
     id: 3,
@@ -33,8 +35,9 @@ const projectsData = [
     role: "Software Engineer",
     techStack: ["C#", "ASP.NET", "Kotlin (Android)"],
     softSkills: ["Leadership", "User-Centric Design", "Requirements Gathering", "Time Management"],
-    imageAlt: "Mininos Mobile App Preview",
-    pictures: ["/placeholder-project3-a.png", "/placeholder-project3-b.png"], // Swap with actual paths later
+    imageAlt: "Mininos UCA Platform",
+    img: "/mininos.png",
+    pictures: ["/mininos.png"],
   },
 ];
 
@@ -80,12 +83,20 @@ export default function Projects() {
               onClick={() => setSelectedProject(project)}
               className="bg-zinc-900/60 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg border border-zinc-700 hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 flex flex-col cursor-pointer group"
             >
-              {/* Card Image Placeholder */}
+              {/* Card Image */}
               <div className="w-full h-48 bg-zinc-800 flex items-center justify-center relative overflow-hidden">
-                 <div className="absolute inset-0 bg-purple-500/10 group-hover:bg-transparent transition-colors duration-300 z-10" />
-                <span className="text-zinc-500 font-medium z-0 text-center px-4">
-                  [Image: {project.imageAlt}]
-                </span>
+                <div className="absolute inset-0 bg-purple-500/10 group-hover:bg-transparent transition-colors duration-300 z-10" />
+                {project.img ? (
+                  <img
+                    src={project.img}
+                    alt={project.imageAlt}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : (
+                  <span className="text-zinc-500 font-medium z-0 text-center px-4">
+                    [Image: {project.imageAlt}]
+                  </span>
+                )}
               </div>
 
               {/* Card Content */}
@@ -134,11 +145,25 @@ export default function Projects() {
             {/* Left Half: Scrollable Pictures */}
             <div className="w-full md:w-1/2 h-1/2 md:h-full border-b md:border-b-0 md:border-r border-zinc-700 overflow-y-auto bg-zinc-950 p-6 flex flex-col gap-6 custom-scrollbar">
               <h4 className="text-zinc-400 font-semibold tracking-wider text-sm uppercase">Gallery</h4>
-              {selectedProject.pictures.map((pic, idx) => (
-                <div key={idx} className="w-full aspect-video bg-zinc-800 rounded-xl flex items-center justify-center border border-zinc-700/50">
-                  <span className="text-zinc-500 font-medium text-sm">[{pic}]</span>
+              {selectedProject.pictures && selectedProject.pictures.length > 0 ? (
+                selectedProject.pictures.map((pic, idx) => (
+                  <div key={idx} className="w-full aspect-video bg-zinc-800 rounded-xl flex items-center justify-center border border-zinc-700/50 overflow-hidden relative group">
+                    {pic && !pic.includes("placeholder") ? (
+                      <img 
+                        src={pic} 
+                        alt={`${selectedProject.title} gallery ${idx + 1}`} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <span className="text-zinc-500 font-medium text-sm">[{pic}]</span>
+                    )}
+                  </div>
+                ))
+              ) : (
+                <div className="w-full aspect-video bg-zinc-800 rounded-xl flex items-center justify-center border border-zinc-700/50">
+                  <span className="text-zinc-500 font-medium text-sm">No images available</span>
                 </div>
-              ))}
+              )}
             </div>
 
             {/* Right Half: Details */}
