@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { FaBars, FaTimes, FaLinkedin, FaGithub } from "react-icons/fa";
-import Link from "next/link";
+import EncryptedTextEffect from "./utils/EncryptedTextEffect";
 
 export default function Navbar() {
   const [nav, setNav] = useState(false);
@@ -10,95 +10,104 @@ export default function Navbar() {
   const links = [
     {
       id: 1,
-      title: "Home",
-      link: "/",
+      title: "About Me",
+      link: "#about",
     },
     {
       id: 2,
-      title: "About Me",
-      link: "/about",
+      title: "Projects",
+      link: "#projects",
     },
     {
       id: 3,
-      title: "Projects",
-      link: "/projects",
-    },
-    {
-      id: 4,
       title: "Contact",
-      link: "/contact",
+      link: "#contact",
     },
   ];
 
   const socials = [
     {
       id: "github",
-      icon: <FaGithub size={30} />,
+      icon: <FaGithub size={24} />,
       link: "https://github.com/mmajewsky133",
     },
     {
       id: "linkedin",
-      icon: <FaLinkedin size={30} />,
+      icon: <FaLinkedin size={24} />,
       link: "https://www.linkedin.com/in/martin-majewsky-z/",
     },
   ];
 
   return (
-    <div
+    <nav
       className="flex justify-between items-center w-full h-20 
-        px-4 text-zinc-300 bg-transparent fixed"
+        px-6 text-zinc-300 fixed top-0 left-0 z-50 bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800/50 transition-all duration-300"
     >
       <div>
-        <h1 className="text-5xl font-bold font-signature">MMZ</h1>
+        <h1 className="text-4xl font-bold font-signature drop-shadow-md text-white hover:text-purple-400 hover:drop-shadow-[0_0_10px_rgba(192,132,252,0.5)] transition-all duration-300 cursor-pointer">
+          <a href="#home">MMZ</a>
+        </h1>
       </div>
 
-      <ul className="hidden md:flex">
-        {links.map(({ id, title, link }) => (
-          <>
+      <ul className="hidden md:flex items-center gap-2">
+        {links.map(({ id, title, link }, index) => (
+          <React.Fragment key={id}>
             <li
-              key={id}
               className="px-4 cursor-pointer capitalize 
-                        font-medium text-zinc-300 "
+                        font-medium text-zinc-400 hover:text-zinc-100 transition-colors duration-300 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
             >
-              <Link href={link}>{title}</Link>
+              <a href={link}>
+                  <EncryptedTextEffect targetText={title} /> 
+              </a>
             </li>
-            <li className="px-4 font-medium text-zinc-300"> / </li>
-          </>
+            {index < links.length - 1 && (
+              <li className="text-zinc-700 font-light text-sm">|</li>
+            )}
+          </React.Fragment>
         ))}
       </ul>
 
-      <ul className="hidden md:flex ">
+      <ul className="hidden md:flex gap-4">
         {socials.map(({ id, icon, link }) => (
-          <li key={id} className="cursor-pointer pr-4 z-10 text-gray-500">
-            <a href={link}>{icon}</a>
+          <li key={id} className="cursor-pointer text-zinc-400 hover:text-purple-400 hover:drop-shadow-[0_0_10px_rgba(192,132,252,0.5)] transition-all duration-300">
+            <a href={link} target="_blank" rel="noreferrer">{icon}</a>
           </li>
         ))}
       </ul>
 
       <div
         onClick={() => setNav(!nav)}
-        className="cursor-pointer pr-4 z-10 text-gray-500 md:hidden"
+        className="cursor-pointer z-50 text-zinc-400 hover:text-white transition-colors md:hidden"
       >
         {nav ? <FaTimes size={30} /> : <FaBars size={30} />}
       </div>
 
-      {nav && (
-        <ul
-          className="flex flex-col justify-center items-center 
-                absolute top-0 left-0 w-full h-screen bg-gradient-to-b 
-                from-black to-gray-800 text-zinc-300"
-        >
+      {/* Mobile Menu */}
+      <div
+        className={`fixed top-0 left-0 w-full h-screen bg-zinc-950/95 backdrop-blur-xl flex flex-col justify-center items-center transition-transform duration-500 ease-in-out ${
+          nav ? "translate-x-0" : "-translate-x-full"
+        } md:hidden`}
+      >
+        <ul className="flex flex-col items-center gap-8">
           {links.map(({ id, title, link }) => (
             <li
               key={id}
-              className="px-4 cursor-pointer capitalize 
-                        font-medium text-zinc-300 hover:scale-105"
+              className="px-4 cursor-pointer capitalize text-2xl
+                        font-medium text-zinc-400 hover:text-white hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] transition-all duration-300"
+              onClick={() => setNav(false)}
             >
-              <Link href={link}>{title}</Link>
+              <a href={link} onClick={() => setNav(false)}>{title}</a>
             </li>
           ))}
+          <li className="flex gap-8 mt-8">
+             {socials.map(({ id, icon, link }) => (
+              <a key={id} href={link} target="_blank" rel="noreferrer" className="text-zinc-400 hover:text-purple-400 hover:scale-110 hover:drop-shadow-[0_0_10px_rgba(192,132,252,0.5)] transition-all duration-300">
+                {icon}
+              </a>
+            ))}
+          </li>
         </ul>
-      )}
-    </div>
+      </div>
+    </nav>
   );
 }

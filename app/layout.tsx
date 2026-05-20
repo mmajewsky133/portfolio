@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar";
-import "./globals.css";
+import LavalampBackground from "./components/LavalampBackground";
+import ".components/globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -14,9 +15,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-black">
+      <body>
+        <LavalampBackground />
         <Navbar />
-        {children}
+        <div className="relative z-0 min-h-screen">
+          {children}
+        </div>
       </body>
     </html>
   );

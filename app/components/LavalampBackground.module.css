@@ -1,0 +1,143 @@
+.backdrop {
+  position: absolute;
+  top: -10vh;
+  left: -10vw;
+  display: grid;
+  place-items: center;
+  width: 120vw;
+  height: 120vh;
+  background: #2a0645;
+  filter: blur(2.5vw) contrast(200%) saturate(200%) brightness(0.7);
+}
+
+.shape {
+  position: absolute;
+  aspect-ratio: 1/1;
+  border-radius: 100%;
+}
+
+.one {
+  width: 40svw;
+  background: linear-gradient(45deg, #37065cff, #270d3bff);
+  transform: rotate(90deg) translate(45lvh, 5lvw);
+  animation: shape-one 7s ease-in-out infinite alternate;
+  animation-delay: -2s;
+}
+
+.two {
+  width: 25lvw;
+  background: linear-gradient(120deg, #310c4dff, #2b0846ff);
+  transform: rotate(200deg) translate(-35lvh, 12lvw);
+  animation: shape-two 4s ease-in-out infinite alternate;
+  animation-delay: -1s;
+}
+
+.three {
+  width: 32svw;
+  background: linear-gradient(210deg, #320e4eff, #2a0844ff);
+  transform: rotate(-165deg) translate(24lvh, -32lvw);
+  animation: shape-three 5s ease-in-out infinite alternate;
+  animation-delay: -3.5s;
+}
+
+.four {
+  width: 29svw;
+  background: linear-gradient(300deg, #40225eff, #331057ff);
+  transform: rotate(25deg) translate(-16lvh, -19lvw);
+  animation: shape-four 6s ease-in-out infinite alternate;
+  animation-delay: -1.8s;
+}
+
+.five {
+  width: 37svw;
+  background: linear-gradient(60deg, #4b1079ff, #532b72ff);
+  transform: rotate(-55deg) translate(30lvh, 26lvw);
+  animation: shape-five 5.5s ease-in-out infinite alternate;
+  animation-delay: -0.4s;
+}
+
+.six {
+  width: 24svw;
+  background: linear-gradient(150deg, #4b0b7c, #642892ff);
+  transform: rotate(120deg) translate(-40lvh, 46lvw);
+  animation: shape-six 9.5s ease-in-out infinite alternate;
+  animation-delay: -7.4s;
+}
+
+.seven {
+  width: 31svw;
+  background: linear-gradient(240deg, #4c1179ff, #3b1a53ff);
+  transform: rotate(-55deg) translate(-24lvh, 56lvw);
+  animation: shape-seven 15.5s ease-in-out infinite alternate;
+  animation-delay: -5.7s;
+}
+
+@keyframes shape-one {
+  from {
+    transform: rotate(90deg) translate(45lvh, 0);
+  }
+
+  to {
+    transform: rotate(120deg) translate(-20lvh, 0);
+  }
+}
+
+@keyframes shape-two {
+  from {
+    transform: rotate(200deg) translate(-35lvh, 12lvw);
+  }
+
+  to {
+    transform: rotate(240deg) translate(-35lvh, 12lvw);
+  }
+}
+
+@keyframes shape-three {
+  from {
+    transform: rotate(-165deg) translate(24lvh, -32lvw);
+  }
+
+  to {
+    transform: rotate(-100deg) translate(24lvh, -32lvw);
+  }
+}
+
+@keyframes shape-four {
+  from {
+    transform: rotate(25deg) translate(-16lvh, -19lvw);
+  }
+
+  to {
+    transform: rotate(-20deg) translate(-16lvh, -19lvw);
+  }
+}
+
+@keyframes shape-five {
+  from {
+    transform: rotate(-55deg) translate(30lvh, 26lvw);
+  }
+
+  to {
+    transform: rotate(-70deg) translate(30lvh, 26lvw);
+  }
+}
+
+@keyframes shape-six {
+  from {
+    transform: rotate(120deg) translate(-40lvh, 46lvw);
+  }
+
+  to {
+    transform: rotate(95deg) translate(52lvh, 46lvw);
+  }
+}
+
+@keyframes shape-seven {
+  from {
+    transform: rotate(-55deg) translate(-24lvh, 56lvw);
+  }
+
+  to {
+    transform: rotate(-75deg) translate(-19lvh, -39lvw);
+  }
+}

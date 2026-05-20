@@ -8,5 +8,6 @@
 @layer base {
   html {
     font-family: "REM", sans-serif;
+    scroll-behavior: smooth;
   }
 }
