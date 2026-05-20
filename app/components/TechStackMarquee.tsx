@@ -55,7 +55,7 @@ export default function TechStackMarquee() {
           <div
             key={trackIdx}
             className="flex gap-6 pr-6 animate-marquee"
-            aria-hidden={trackIdx === 1}
+            aria-hidden="true"
           >
             {skills.map((skill, idx) => {
               const { Icon } = skill;

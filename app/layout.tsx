@@ -1,6 +1,6 @@
 import Navbar from "./components/Navbar";
 import LavalampBackground from "./components/LavalampBackground";
-import ".components/globals.css";
+import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
