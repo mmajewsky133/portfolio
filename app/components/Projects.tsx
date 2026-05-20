@@ -3,43 +3,7 @@
 import React, { useState } from "react";
 import { FaTimes, FaJava, FaPhp, FaReact, FaAngular, FaDocker, FaGitAlt, FaCode, FaNetworkWired } from "react-icons/fa";
 import { SiSpringboot, SiKotlin, SiLaravel, SiTypescript, SiNextdotjs, SiTailwindcss, SiDotnet, SiMysql, SiOracle, SiMongodb } from "react-icons/si";
-
-// Define projects with added details for the modal
-const projectsData = [
-  {
-    id: 1,
-    title: "SIVIPCAN v5",
-    description: "Enterprise healthcare platform deployed nationwide across the Ministry of Health. Engineered as an independent microservice for the epidemiological monitoring of cancer screening tests.",
-    role: "Backend Architect & Developer",
-    techStack: ["Java", "Spring Boot", "Angular", "Oracle PL/SQL"],
-    softSkills: ["Leadership", "System Architecture", "Cross-team Collaboration"],
-    imageAlt: "SIVIPCAN v5",
-    img: "/sivipcan5.png",
-    pictures: ["/sivipcan5.png"],
-  },
-  {
-    id: 2,
-    title: "SAI-MCN",
-    description: "Internal multiplatform application to automate event registrations and secure donations. Handled 2,500+ real-time registrations with strict adherence to PCI-DSS and GDPR.",
-    role: "Full-Stack Engineer",
-    techStack: ["Kotlin (KMP)", "Laravel", "MySQL"],
-    softSkills: ["Agile Delivery", "Security Compliance", "Problem Solving"],
-    imageAlt: "SAI-MCN",
-    img: "/saimcn.png",
-    pictures: ["/saimcn.png"],
-  },
-  {
-    id: 3,
-    title: "Mininos UCA Platform",
-    description: "Centralized management platform and native Android companion application to optimize daily operations and real-time data entry for campus animal rescue initiatives.",
-    role: "Software Engineer",
-    techStack: ["C#", "ASP.NET", "Kotlin (Android)"],
-    softSkills: ["Leadership", "User-Centric Design", "Requirements Gathering", "Time Management"],
-    imageAlt: "Mininos UCA Platform",
-    img: "/mininos.png",
-    pictures: ["/mininos.png"],
-  },
-];
+import { useLocale } from "./utils/LocaleContext";
 
 // Helper to resolve icon from string
 const getTechIcon = (tech: string) => {
@@ -60,12 +24,65 @@ const getTechIcon = (tech: string) => {
 };
 
 export default function Projects() {
-  const [selectedProject, setSelectedProject] = useState<typeof projectsData[0] | null>(null);
+  const { t } = useLocale();
+  const [selectedProjectId, setSelectedProjectId] = useState<number | null>(null);
+
+  // Define projects with localized details inside the component
+  const projectsData = [
+    {
+      id: 1,
+      title: "SIVIPCAN v5",
+      description: t("project.sivipcan.desc"),
+      role: t("project.sivipcan.role"),
+      techStack: ["Java", "Spring Boot", "Angular", "Oracle PL/SQL"],
+      softSkills: [
+        t("project.sivipcan.skills.0"),
+        t("project.sivipcan.skills.1"),
+        t("project.sivipcan.skills.2"),
+      ],
+      imageAlt: "SIVIPCAN v5",
+      img: "/sivipcan5.png",
+      pictures: ["/sivipcan5.png"],
+    },
+    {
+      id: 2,
+      title: "SAI-MCN",
+      description: t("project.saimcn.desc"),
+      role: t("project.saimcn.role"),
+      techStack: ["Kotlin (KMP)", "Laravel", "MySQL"],
+      softSkills: [
+        t("project.saimcn.skills.0"),
+        t("project.saimcn.skills.1"),
+        t("project.saimcn.skills.2"),
+      ],
+      imageAlt: "SAI-MCN",
+      img: "/saimcn.png",
+      pictures: ["/saimcn.png"],
+    },
+    {
+      id: 3,
+      title: "Mininos UCA Platform",
+      description: t("project.mininos.desc"),
+      role: t("project.mininos.role"),
+      techStack: ["C#", "ASP.NET", "Kotlin (Android)"],
+      softSkills: [
+        t("project.mininos.skills.0"),
+        t("project.mininos.skills.1"),
+        t("project.mininos.skills.2"),
+        t("project.mininos.skills.3"),
+      ],
+      imageAlt: "Mininos UCA Platform",
+      img: "/mininos.png",
+      pictures: ["/mininos.png"],
+    },
+  ];
+
+  const selectedProject = projectsData.find((p) => p.id === selectedProjectId) || null;
 
   // Close modal when clicking background overlay
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
-      setSelectedProject(null);
+      setSelectedProjectId(null);
     }
   };
 
@@ -73,14 +90,14 @@ export default function Projects() {
     <section id="projects" className="min-h-screen w-full flex flex-col justify-center py-24 px-4 relative">
       <div className="max-w-6xl mx-auto w-full">
         <h3 className="text-4xl font-bold mb-16 text-center border-b border-zinc-700 pb-4 inline-block mx-auto justify-center text-white drop-shadow-md">
-          Featured Projects
+          {t("projects.title")}
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projectsData.map((project) => (
             <article
               key={project.id}
-              onClick={() => setSelectedProject(project)}
+              onClick={() => setSelectedProjectId(project.id)}
               className="bg-zinc-900/60 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg border border-zinc-700 hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all duration-300 flex flex-col cursor-pointer group"
             >
               {/* Card Image */}
@@ -136,7 +153,7 @@ export default function Projects() {
             
             {/* Close Button */}
             <button 
-              onClick={() => setSelectedProject(null)}
+              onClick={() => setSelectedProjectId(null)}
               className="absolute top-4 right-4 z-50 p-2 bg-zinc-800 rounded-full text-zinc-400 hover:text-white hover:bg-purple-600 transition-colors"
             >
               <FaTimes size={20} />
@@ -144,7 +161,7 @@ export default function Projects() {
 
             {/* Left Half: Scrollable Pictures */}
             <div className="w-full md:w-1/2 h-1/2 md:h-full border-b md:border-b-0 md:border-r border-zinc-700 overflow-y-auto bg-zinc-950 p-6 flex flex-col gap-6 custom-scrollbar">
-              <h4 className="text-zinc-400 font-semibold tracking-wider text-sm uppercase">Gallery</h4>
+              <h4 className="text-zinc-400 font-semibold tracking-wider text-sm uppercase">{t("projects.gallery")}</h4>
               {selectedProject.pictures && selectedProject.pictures.length > 0 ? (
                 selectedProject.pictures.map((pic, idx) => (
                   <div key={idx} className="w-full aspect-video bg-zinc-800 rounded-xl flex items-center justify-center border border-zinc-700/50 overflow-hidden relative group">
@@ -161,7 +178,7 @@ export default function Projects() {
                 ))
               ) : (
                 <div className="w-full aspect-video bg-zinc-800 rounded-xl flex items-center justify-center border border-zinc-700/50">
-                  <span className="text-zinc-500 font-medium text-sm">No images available</span>
+                  <span className="text-zinc-500 font-medium text-sm">{t("projects.no_images")}</span>
                 </div>
               )}
             </div>
@@ -174,12 +191,12 @@ export default function Projects() {
               </div>
 
               <div>
-                <h4 className="text-zinc-400 font-semibold tracking-wider text-sm uppercase mb-3">About The Project</h4>
+                <h4 className="text-zinc-400 font-semibold tracking-wider text-sm uppercase mb-3">{t("projects.about")}</h4>
                 <p className="text-zinc-300 leading-relaxed font-light">{selectedProject.description}</p>
               </div>
 
               <div>
-                <h4 className="text-zinc-400 font-semibold tracking-wider text-sm uppercase mb-3">Technologies</h4>
+                <h4 className="text-zinc-400 font-semibold tracking-wider text-sm uppercase mb-3">{t("projects.technologies")}</h4>
                 <div className="flex flex-wrap gap-2">
                   {selectedProject.techStack.map((tech, index) => (
                     <span key={index} className="flex items-center gap-2 bg-zinc-800/50 text-zinc-200 text-sm px-4 py-2 rounded-lg border border-zinc-700/50 hover:border-purple-500/30 transition-colors cursor-default">
@@ -191,7 +208,7 @@ export default function Projects() {
               </div>
 
               <div>
-                <h4 className="text-zinc-400 font-semibold tracking-wider text-sm uppercase mb-3">Core Soft Skills</h4>
+                <h4 className="text-zinc-400 font-semibold tracking-wider text-sm uppercase mb-3">{t("projects.skills")}</h4>
                 <ul className="list-disc list-inside text-zinc-300 font-light space-y-1">
                   {selectedProject.softSkills.map((skill, index) => (
                     <li key={index}>{skill}</li>

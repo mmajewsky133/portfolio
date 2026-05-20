@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 import LavalampBackground from "./components/LavalampBackground";
 import "./globals.css";
 import type { Metadata } from "next";
+import { LocaleProvider } from "./components/utils/LocaleContext";
 
 export const metadata: Metadata = {
   title: "%s - Martin Majewsky Portfolio",
@@ -16,11 +17,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <LavalampBackground />
-        <Navbar />
-        <div className="relative z-0 min-h-screen">
-          {children}
-        </div>
+        <LocaleProvider>
+          <LavalampBackground />
+          <Navbar />
+          <div className="relative z-0 min-h-screen">
+            {children}
+          </div>
+        </LocaleProvider>
       </body>
     </html>
   );

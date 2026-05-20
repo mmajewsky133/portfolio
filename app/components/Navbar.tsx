@@ -3,24 +3,26 @@
 import React, { useState } from "react";
 import { FaBars, FaTimes, FaLinkedin, FaGithub } from "react-icons/fa";
 import EncryptedTextEffect from "./utils/EncryptedTextEffect";
+import { useLocale } from "./utils/LocaleContext";
 
 export default function Navbar() {
   const [nav, setNav] = useState(false);
+  const { locale, setLocale, t } = useLocale();
 
   const links = [
     {
       id: 1,
-      title: "About Me",
+      title: t("nav.about"),
       link: "#about",
     },
     {
       id: 2,
-      title: "Projects",
+      title: t("nav.projects"),
       link: "#projects",
     },
     {
       id: 3,
-      title: "Contact",
+      title: t("nav.contact"),
       link: "#contact",
     },
   ];
@@ -67,13 +69,35 @@ export default function Navbar() {
         ))}
       </ul>
 
-      <ul className="hidden md:flex gap-4">
-        {socials.map(({ id, icon, link }) => (
-          <li key={id} className="cursor-pointer text-zinc-400 hover:text-purple-400 hover:drop-shadow-[0_0_10px_rgba(192,132,252,0.5)] transition-all duration-300">
-            <a href={link} target="_blank" rel="noreferrer">{icon}</a>
-          </li>
-        ))}
-      </ul>
+      {/* Desktop Socials & Locale Switch */}
+      <div className="hidden md:flex items-center gap-6">
+        <ul className="flex gap-4">
+          {socials.map(({ id, icon, link }) => (
+            <li key={id} className="cursor-pointer text-zinc-400 hover:text-purple-400 hover:drop-shadow-[0_0_10px_rgba(192,132,252,0.5)] transition-all duration-300">
+              <a href={link} target="_blank" rel="noreferrer">{icon}</a>
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex items-center bg-zinc-800/80 border border-zinc-700/50 rounded-full p-0.5 relative overflow-hidden select-none">
+          <button
+            onClick={() => setLocale("en")}
+            className={`px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide uppercase transition-all duration-300 z-10 ${
+              locale === "en" ? "text-white bg-purple-600/80 shadow-[0_0_8px_rgba(168,85,247,0.4)] font-extrabold" : "text-zinc-400 hover:text-zinc-200"
+            }`}
+          >
+            EN
+          </button>
+          <button
+            onClick={() => setLocale("es")}
+            className={`px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide uppercase transition-all duration-300 z-10 ${
+              locale === "es" ? "text-white bg-purple-600/80 shadow-[0_0_8px_rgba(168,85,247,0.4)] font-extrabold" : "text-zinc-400 hover:text-zinc-200"
+            }`}
+          >
+            ES
+          </button>
+        </div>
+      </div>
 
       <div
         onClick={() => setNav(!nav)}
@@ -99,12 +123,33 @@ export default function Navbar() {
               <a href={link} onClick={() => setNav(false)}>{title}</a>
             </li>
           ))}
-          <li className="flex gap-8 mt-8">
-             {socials.map(({ id, icon, link }) => (
-              <a key={id} href={link} target="_blank" rel="noreferrer" className="text-zinc-400 hover:text-purple-400 hover:scale-110 hover:drop-shadow-[0_0_10px_rgba(192,132,252,0.5)] transition-all duration-300">
-                {icon}
-              </a>
-            ))}
+          <li className="flex flex-col items-center gap-6 mt-8">
+            <div className="flex gap-8">
+              {socials.map(({ id, icon, link }) => (
+                <a key={id} href={link} target="_blank" rel="noreferrer" className="text-zinc-400 hover:text-purple-400 hover:scale-110 hover:drop-shadow-[0_0_10px_rgba(192,132,252,0.5)] transition-all duration-300">
+                  {icon}
+                </a>
+              ))}
+            </div>
+
+            <div className="flex items-center bg-zinc-900/90 border border-zinc-800 rounded-full p-0.5 select-none">
+              <button
+                onClick={() => setLocale("en")}
+                className={`px-4 py-1.5 rounded-full text-xs font-semibold uppercase transition-all duration-300 ${
+                  locale === "en" ? "text-white bg-purple-600/80 shadow-[0_0_10px_rgba(168,85,247,0.4)]" : "text-zinc-400 hover:text-zinc-200"
+                }`}
+              >
+                EN
+              </button>
+              <button
+                onClick={() => setLocale("es")}
+                className={`px-4 py-1.5 rounded-full text-xs font-semibold uppercase transition-all duration-300 ${
+                  locale === "es" ? "text-white bg-purple-600/80 shadow-[0_0_10px_rgba(168,85,247,0.4)]" : "text-zinc-400 hover:text-zinc-200"
+                }`}
+              >
+                ES
+              </button>
+            </div>
           </li>
         </ul>
       </div>

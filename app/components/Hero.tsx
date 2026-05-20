@@ -1,14 +1,19 @@
+"use client";
+
 import React from "react";
 import TextTransitionAnimation from "./utils/TextTransitionAnimation";
 import { FaChevronDown } from "react-icons/fa";
+import { useLocale } from "./utils/LocaleContext";
 
 export default function Hero() {
+  const { t } = useLocale();
+
   const jobs = [
-    "Software Engineer", 
-    "Backend Architect", 
-    "Full-Stack Developer", 
-    "Technical Lead",
-    "Project Manager"
+    t("hero.job.0"), 
+    t("hero.job.1"), 
+    t("hero.job.2"), 
+    t("hero.job.3"),
+    t("hero.job.4")
   ];
 
   return (
@@ -26,10 +31,10 @@ export default function Hero() {
       {/* Action Buttons */}
       <div className="flex gap-4 mt-8">
         <a href="#contact" className="px-8 py-3 rounded-full bg-purple-500/10 border border-purple-500/50 text-purple-400 font-semibold hover:bg-purple-500 hover:text-white transition-all duration-300 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]">
-          Get in Touch
+          {t("hero.contact")}
         </a>
         <a href="#projects" className="px-8 py-3 rounded-full bg-zinc-800/50 border border-zinc-700/50 text-zinc-300 font-semibold hover:border-zinc-500 hover:text-white transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-          View Projects
+          {t("hero.projects")}
         </a>
       </div>
 
@@ -39,7 +44,7 @@ export default function Hero() {
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 group cursor-pointer animate-bounce"
       >
         <span className="text-zinc-500 text-sm font-medium uppercase tracking-widest group-hover:text-purple-400 transition-colors duration-300">
-          About Me
+          {t("hero.scroll")}
         </span>
         <div className="p-2 bg-zinc-800/50 rounded-full border border-zinc-700/50 text-zinc-400 group-hover:text-purple-400 group-hover:border-purple-500/50 transition-colors duration-300">
           <FaChevronDown size={16} />
