@@ -27,7 +27,7 @@ const translations = {
     "about.cv": "Download CV",
     "about.stack": "My Technology Stack",
     "about.scroll": "My projects",
-    "about.cv_link": "/cv-en.pdf",
+    "about.cv_link": "/portfolio/cv-en.pdf",
 
     // Projects
     "projects.title": "Featured Projects",
@@ -89,7 +89,7 @@ const translations = {
     "about.cv": "Descargar CV",
     "about.stack": "Mi Stack Tecnológico",
     "about.scroll": "Mis proyectos",
-    "about.cv_link": "/cv-es.pdf",
+    "about.cv_link": "/portfolio/cv-es.pdf",
 
     // Projects
     "projects.title": "Proyectos Destacados",

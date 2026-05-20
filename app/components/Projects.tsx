@@ -41,8 +41,8 @@ export default function Projects() {
         t("project.sivipcan.skills.2"),
       ],
       imageAlt: "SIVIPCAN v5",
-      img: "/sivipcan5.png",
-      pictures: ["/sivipcan5.png"],
+      img: "/portfolio/sivipcan5.png",
+      pictures: ["/portfolio/sivipcan5.png"],
     },
     {
       id: 2,
@@ -56,8 +56,8 @@ export default function Projects() {
         t("project.saimcn.skills.2"),
       ],
       imageAlt: "SAI-MCN",
-      img: "/saimcn.png",
-      pictures: ["/saimcn.png"],
+      img: "/portfolio/saimcn.png",
+      pictures: ["/portfolio/saimcn.png"],
     },
     {
       id: 3,
@@ -72,8 +72,8 @@ export default function Projects() {
         t("project.mininos.skills.3"),
       ],
       imageAlt: "Mininos UCA Platform",
-      img: "/mininos.png",
-      pictures: ["/mininos.png"],
+      img: "/portfolio/mininos.png",
+      pictures: ["/portfolio/mininos.png"],
     },
   ];
 
